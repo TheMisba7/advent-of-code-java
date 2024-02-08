@@ -19,7 +19,6 @@ public class Day04 implements Day{
                 }
             }
             points += cardPoints;
-
         }
         return String.valueOf(points);
     }
@@ -31,7 +30,7 @@ public class Day04 implements Day{
             Card card = Card.parseString(line);
             cardList.add(card);
         }
-
+        int cardsNbr = 0;
         for (int i = 0; i < cardList.size(); i++) {
             int count = cardList.get(i).countMatchingNumbers();
             int next = i + 1;
@@ -40,25 +39,10 @@ public class Day04 implements Day{
                 count--;
                 next++;
             }
+            cardsNbr += cardList.get(i).count;
         }
-
-        int count = 0;
-        for (Card c: cardList) {
-            count += c.count;
-        }
-        return String.valueOf(count);
+        return String.valueOf(cardsNbr);
     }
-
-    private boolean isWinningNumberAvailable(String [] availableNumbers, String winningNumber) {
-        for (String nbr: availableNumbers) {
-            if (nbr.equals(winningNumber)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     private static final class Card {
         int id;
         Set<Integer> winningNumbers;
@@ -96,6 +80,4 @@ public class Day04 implements Day{
             return new Card(cardId, winning_numbers, available_numbers, 1);
         }
     }
-
-
 }

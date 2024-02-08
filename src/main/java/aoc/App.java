@@ -3,8 +3,6 @@
  */
 package aoc;
 
-import aoc.day01.Day01;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -51,16 +49,25 @@ public class App {
         if(args.length > 1){
             part = Integer.parseInt(args[1]);
         }
+        run(day, part);
 
+    }
+
+    private static void run(int day, int part) {
         List<String> input = loadInput(day);
-
         String result;
+        Day dayToRun = DAYS.get(day);
+        long startTime;
         if(part == 1) {
-            result = DAYS.get(day).part1(input);
+            startTime = System.currentTimeMillis();
+            result = dayToRun.part1(input);
         } else {
-            result = DAYS.get(day).part2(input);
+            startTime = System.currentTimeMillis();
+            result = dayToRun.part2(input);
         }
+        long endTime = System.currentTimeMillis() - startTime;
 
-        System.out.println(result);
+        System.out.println("Day " + day + " | part " + part + " result: " + result);
+        System.out.println("Execution time in milliseconds: " + endTime);
     }
 }
